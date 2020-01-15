@@ -9,7 +9,7 @@
 #include <stdarg.h>
 
 static void my_putptr(void *ptr) {
-    long nb = ptr;
+    long nb = (long)ptr;
     my_putstr("0x");
     my_putnbr_base_unsigned(nb, "0123456789abcdef");
 }

@@ -14,7 +14,8 @@ static void check_and_display_matches(int *table, turn_info *info, int m_max)
     if (info->nb <= 0)
         my_putstr("Error: you have to remove at least one match\n");
     if (info->nb > m_max)
-        my_printf("Error: you cannot remove more than %d matches per turn\n", m_max);
+        my_printf("Error: you cannot remove more than %d matches per turn\n",
+                    m_max);
 }
 
 static void check_and_display_lines(turn_info *info, int l_max)
@@ -57,7 +58,7 @@ void get_turn_info_pl(turn_info *info, int l_max, int *table, int m_max)
                 info->nb, info->line);
 }
 
-void get_turn_info_ai(turn_info *info, int *table, int line_max, int matches_max)
+void get_turn_info_ai(turn_info *info, int *table, int line_max, int m_max)
 {
     int line = (random() % line_max - 1) + 1;
     int nb = 0;
@@ -66,13 +67,6 @@ void get_turn_info_ai(turn_info *info, int *table, int line_max, int matches_max
     while (table[line - 1] == 0)
         line = (random() % line_max - 1) + 1;
     info->line = line;
-    info->nb = (random() % MIN(table[line - 1], matches_max)) + 1;
+    info->nb = (random() % MIN(table[line - 1], m_max)) + 1;
     my_printf("AI removed %d match(es) from line %d\n", info->nb, info->line);
-}
-
-void apply_matchsticks(int *table, turn_info ti)
-{
-    if (!table[ti.line - 1])
-        exit(84);
-    table[ti.line - 1] += -(ti.nb);
 }

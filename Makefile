@@ -12,7 +12,6 @@ CC	= gcc
 RM	= rm -f
 
 SRCS	=	src/main.c		\
-			src/debug.c		\
 			src/matches.c 	\
 			src/map.c
 

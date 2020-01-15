@@ -7,6 +7,13 @@
 
 #include "matchstick.h"
 
+void apply_matchsticks(int *table, turn_info ti)
+{
+    if (!table[ti.line - 1])
+        exit(84);
+    table[ti.line - 1] += -(ti.nb);
+}
+
 int matchstick(int lines, int max)
 {
     int *game_table = create_game_table(lines);

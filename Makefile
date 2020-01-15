@@ -11,12 +11,11 @@ CC	= gcc
 
 RM	= rm -f
 
-SRCS	=	main.c
+SRCS	=	src/main.c
 
 OBJS	= $(SRCS:.c=.o)
 
 CFLAGS = -I ./include/
-CFLAGS += -g
 CFLAGS += -Wall -Wextra
 
 all: $(NAME)
@@ -31,5 +30,8 @@ fclean: clean
 	$(RM) $(NAME)
 
 re: fclean all
+
+debug: CFLAGS += -g
+debug: re
 
 .PHONY: all clean fclean re

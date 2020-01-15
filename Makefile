@@ -21,12 +21,15 @@ CFLAGS += -Wall -Wextra
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	 $(CC) $(OBJS) -o $(NAME) $(LDFLAGS)
+	make -C lib/my
+	$(CC) $(OBJS) -o $(NAME) $(LDFLAGS) -L./lib -lmy
 
 clean:
+	make -C lib/my clean
 	$(RM) $(OBJS)
 
 fclean: clean
+	make -C lib/my fclean
 	$(RM) $(NAME)
 
 re: fclean all

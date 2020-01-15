@@ -5,6 +5,11 @@
 ** matchstick.h
 */
 
+#ifndef MATCHSTICK
+#define MATCHSTICK
+
 #include <stdio.h>
 #include <unistd.h>
 #include "my.h"
+
+#endif

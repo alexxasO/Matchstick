@@ -14,6 +14,9 @@
 
 #include <stdarg.h>
 
+#define ABS(N) ((N<0)?(-N):(N))
+#define MIN(a,b) ((a<b)?(a):(b))
+
 void my_put_string_non_printable(char *str);
 void my_putchar(char c );
 int my_isneg(int nb);

@@ -7,6 +7,15 @@
 
 #include "matchstick.h"
 
+int is_map_empty(int *table, int lines)
+{
+    for (int i = 0; i < lines; i++) {
+        if (table[i] > 0)
+            return 0;
+    }
+    return 1;
+}
+
 static void print_reg_line(int pos, int col_max, int *table)
 {
     int sticks = (pos * 2 - 1);
@@ -41,4 +50,5 @@ void print_map(int lines, int *table)
         }
         print_reg_line(i, col_max, table);
     }
+    my_putchar('\n');
 }

@@ -7,45 +7,25 @@
 
 #include "matchstick.h"
 
-void print_reg_line(int pos, int col_max)
-{
-    int sticks = (pos * 2 - 1);
-    int spaces = (col_max - sticks) / 2;
-    //TODO print les spaces puis sticks puis space encore
-    my_putchar('*');
-    for (int i = 0; i < spaces; i++)
-        my_putchar(' ');
-    for (int i = 0; i < sticks; i++)
-        my_putchar('|');
-    for (int i = 0; i < spaces; i++)
-        my_putchar(' ');
-    my_putchar('*');
-    my_putchar('\n');
-}
-
-void print_border(int col_max) {
-    for (int i = 0; i < col_max + 2; i++) {
-        my_putchar('*');
-    }
-    my_putchar('\n');
-}
-
-void print_map(int lines)
-{
-    int col_max = (lines * 2) - 1;
-
-    for (int i = 0; i <= lines + 1; i++) {
-        if (i <= 0 || i >= lines + 1) {
-            print_border(col_max);
-            continue;
-        }
-        print_reg_line(i, col_max);
-    }
-}
-
 int matchstick(int lines, int max)
 {
-    print_map(lines);
+    int *game_table = create_game_table(lines);
+    int playing = 1;
+    int turn = 1;
+    turn_info ti;
+
+    print_map(lines, game_table);
+    while (playing) {
+        if (turn == 1)
+            get_turn_info_pl(&ti);
+        else
+            get_turn_info_ai(&ti);
+        apply_matchsticks(game_table, ti);
+        print_table_debug(game_table, lines);
+        print_map(lines, game_table);
+        //test si tout est vide et return 2 si pdt tour du joueur (1 sinon)
+        turn = -turn;
+    }
     return 0;
 }
 

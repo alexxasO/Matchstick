@@ -11,7 +11,10 @@ CC	= gcc
 
 RM	= rm -f
 
-SRCS	=	src/main.c
+SRCS	=	src/main.c		\
+			src/debug.c		\
+			src/matches.c 	\
+			src/map.c
 
 OBJS	= $(SRCS:.c=.o)
 

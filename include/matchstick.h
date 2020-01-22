@@ -28,7 +28,11 @@ void get_turn_info_pl(turn_info *info, int l_max, int *table, int m_max);
 void get_turn_info_ai(turn_info *info, int *table, int line_max, int matches_max);
 int *create_game_table(int line);
 int is_map_empty(int *table, int lines);
+int check_and_display_matches(int *table, turn_info *info, int m_max);
+int check_and_display_lines(turn_info *info, int l_max, int *table);
+
 //DEBUG FUNCTIONS
+
 void print_table_debug(int *game_table, int lines);
 
 #endif

@@ -7,8 +7,10 @@
 
 #include "matchstick.h"
 
-static void check_and_display_matches(int *table, turn_info *info, int m_max)
+int check_and_display_matches(int *table, turn_info *info, int m_max)
 {
+    // if (info->nb == NULL)
+    //     return 84;
     if (table[info->line - 1] < info->nb)
         my_putstr("Error: not enough matches on this line\n");
     if (info->nb <= 0)
@@ -16,12 +18,17 @@ static void check_and_display_matches(int *table, turn_info *info, int m_max)
     if (info->nb > m_max)
         my_printf("Error: you cannot remove more than %d matches per turn\n",
                     m_max);
+    return 0;
 }
 
-static void check_and_display_lines(turn_info *info, int l_max)
+int check_and_display_lines(turn_info *info, int l_max, int *table)
 {
+    // if (info->nb == NULL) {
+    //     return 84;
+    // }
     if (info->line > l_max || info->line <= 0)
         my_putstr("Error: this line is out of range\n");
+    return 0;
 }
 
 int *create_game_table(int line)
@@ -33,35 +40,9 @@ int *create_game_table(int line)
     return game_table;
 }
 
-void get_turn_info_pl(turn_info *info, int l_max, int *table, int m_max)
-{
-    char *buf = malloc(sizeof(char) * READ_SIZE + 1);
-    int readsize = 0;
-
-    my_putstr("Your turn:\n");
-    do {
-        my_putstr("Line: ");
-        readsize = read(0, buf, READ_SIZE);
-        buf[readsize] = '\0';
-        info->line = my_getnbr(buf);
-        check_and_display_lines(info, l_max);
-    } while ((info->line > l_max || info->line <= 0));
-    do {
-        my_putstr("Matches: ");
-        readsize = read(0, buf, READ_SIZE);
-        buf[readsize] = '\0';
-        info->nb = my_getnbr(buf);
-        check_and_display_matches(table, info, m_max);
-    } while (table[info->line - 1] < info->nb || info->nb <= 0 ||
-            info->nb > m_max);
-    my_printf("Player removed %d match(es) from line %d\n",
-                info->nb, info->line);
-}
-
 void get_turn_info_ai(turn_info *info, int *table, int line_max, int m_max)
 {
     int line = (random() % line_max - 1) + 1;
-    int nb = 0;
 
     my_putstr("AI's turn...\n");
     while (table[line - 1] == 0)

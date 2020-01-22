@@ -18,7 +18,6 @@ int matchstick(int lines, int max)
 {
     int *game_table = create_game_table(lines);
     int playing = 1;
-    int empty = 0;
     int turn = 1;
     turn_info ti;
 

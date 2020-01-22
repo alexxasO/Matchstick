@@ -13,7 +13,8 @@ RM	= rm -f
 
 SRCS	=	src/main.c		\
 			src/matches.c 	\
-			src/map.c
+			src/map.c		\
+			src/gameplay.c
 
 OBJS	= $(SRCS:.c=.o)
 

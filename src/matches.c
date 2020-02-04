@@ -21,7 +21,7 @@ int check_and_display_matches(int *table, turn_info *info, int m_max)
     return 0;
 }
 
-int check_and_display_lines(turn_info *info, int l_max, int *table)
+int check_and_display_lines(turn_info *info, int l_max)
 {
     // if (info->nb == NULL) {
     //     return 84;

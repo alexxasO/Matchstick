@@ -23,9 +23,11 @@ int matchstick(int lines, int max, int *turn)
     print_map(lines, game_table);
     while (playing) {
         if (*turn == 1)
-            get_turn_info_pl(&ti, lines, game_table, max);
+            playing = get_turn_info_pl(&ti, lines, game_table, max);
         else
             get_turn_info_ai(&ti, game_table, lines, max);
+        if  (playing == 0)
+            return 0;
         apply_matchsticks(game_table, ti);
         print_map(lines, game_table);
         if (is_map_empty(game_table, lines)) {
@@ -47,10 +49,11 @@ int main(int ac, char **av)
     srandom(time(NULL));
     lines = my_getnbr(av[1]);
     max = my_getnbr(av[2]);
-    matchstick(lines, max, &turn);
+    if (matchstick(lines, max, &turn))
+        return 0;
     if (turn == -1)
         return 1;
     if (turn == 1)
         return 2;
-    return 0;
+    return 84;
 }

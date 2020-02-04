@@ -15,7 +15,7 @@ RED =		"\033[0;31m"
 BRED =		"\033[1;31m"
 FLASH = 	"\e[5;30m"
 BYELLOW =	"\e[1;33m"
-BMAGENTA =	"\e[1;35m"
+BMAGENTA =	"\e[1;95m"
 
 SRC	=	concat_params.c	\
 		flags.c	\

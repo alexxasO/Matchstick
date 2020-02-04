@@ -9,25 +9,28 @@
 
 int check_and_display_matches(int *table, turn_info *info, int m_max)
 {
-    // if (info->nb == NULL)
-    //     return 84;
-    if (table[info->line - 1] < info->nb)
+    if (table[info->line - 1] < info->nb) {
         my_putstr("Error: not enough matches on this line\n");
-    if (info->nb <= 0)
+        return 1;
+    }
+    if (info->nb <= 0) {
         my_putstr("Error: you have to remove at least one match\n");
-    if (info->nb > m_max)
+        return 1;
+    }
+    if (info->nb > m_max) {
         my_printf("Error: you cannot remove more than %d matches per turn\n",
                     m_max);
+        return 1;
+    }
     return 0;
 }
 
 int check_and_display_lines(turn_info *info, int l_max)
 {
-    // if (info->nb == NULL) {
-    //     return 84;
-    // }
-    if (info->line > l_max || info->line <= 0)
+    if (info->line > l_max || info->line <= 0) {
         my_putstr("Error: this line is out of range\n");
+        return 1;
+    }
     return 0;
 }
 

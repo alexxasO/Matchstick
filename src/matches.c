@@ -7,7 +7,7 @@
 
 #include "matchstick.h"
 
-int check_and_display_matches(int *table, turn_info *info, int m_max)
+int check_and_display_matches(int *table, turn_info *info, int m_max, char *buf)
 {
     if (table[info->line - 1] < info->nb) {
         my_putstr("Error: not enough matches on this line\n");
@@ -22,13 +22,21 @@ int check_and_display_matches(int *table, turn_info *info, int m_max)
                     m_max);
         return 1;
     }
+    if (!my_str_isnum_noline(buf)) {
+        my_putstr("Error: invalid input (positive number expected)\n");
+        return 1;
+    }
     return 0;
 }
 
-int check_and_display_lines(turn_info *info, int l_max)
+int check_and_display_lines(turn_info *info, int l_max, char *buf)
 {
     if (info->line > l_max || info->line <= 0) {
         my_putstr("Error: this line is out of range\n");
+        return 1;
+    }
+    if (!my_str_isnum_noline(buf)) {
+        my_putstr("Error: invalid input (positive number expected)\n");
         return 1;
     }
     return 0;

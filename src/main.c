@@ -29,10 +29,11 @@ int matchstick(int lines, int max, int *turn)
         if  (playing == 0)
             return 0;
         apply_matchsticks(game_table, ti);
-        print_map(lines, game_table);
         if (is_map_empty(game_table, lines)) {
+            print_map_empty(lines, game_table);
             playing = 0;
-        }
+        } else
+            print_map(lines, game_table);
         *turn = -(*turn);
     }
     return 0;
@@ -51,9 +52,13 @@ int main(int ac, char **av)
     max = my_getnbr(av[2]);
     if (matchstick(lines, max, &turn))
         return 0;
-    if (turn == -1)
+    if (turn == -1) {
+        my_putstr("You lost, too bad...\n");
         return 1;
-    if (turn == 1)
+    }
+    if (turn == 1) {
+        my_putstr("I lost... snif... but I'll get you next time!!\n");
         return 2;
+    }
     return 84;
 }

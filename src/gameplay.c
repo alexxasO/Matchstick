@@ -19,8 +19,7 @@ static int choose_line(int l_max, turn_info *info, char *buf, int *table)
             return 1;
         buf[readsize] = '\0';
         info->line = my_getnbr(buf);
-        correct = check_and_display_lines(info, l_max);
-        if (correct == 1)
+        if ((correct = check_and_display_lines(info, l_max, buf)) == 1)
             continue;
         my_putstr("Matches: ");
         readsize = read(0, buf, READ_SIZE);
@@ -29,7 +28,7 @@ static int choose_line(int l_max, turn_info *info, char *buf, int *table)
         }
         buf[readsize] = '\0';
         info->nb = my_getnbr(buf);
-        correct = check_and_display_matches(table, info, info->max);
+        correct = check_and_display_matches(table, info, info->max, buf);
     } while (correct == 1);
     return 0;
 }

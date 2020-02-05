@@ -39,6 +39,19 @@ static void print_border(int col_max) {
     my_putchar('\n');
 }
 
+void print_map_empty(int lines, int *table)
+{
+    int col_max = (lines * 2) - 1;
+
+    for (int i = 0; i <= lines + 1; i++) {
+        if (i <= 0 || i >= lines + 1) {
+            print_border(col_max);
+            continue;
+        }
+        print_reg_line(i, col_max, table);
+    }
+}
+
 void print_map(int lines, int *table)
 {
     int col_max = (lines * 2) - 1;
